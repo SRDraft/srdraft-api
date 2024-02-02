@@ -1,0 +1,28 @@
+# gitignore file for express app (node.js)
+# http://www.toptal.com/developers/gitignore/api/node
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# node modules
+node_modules
+
+# env
+.env
+.env.test
+.env.local
+.env.development
+.env.development.local
+.env.production
+.env.production.local
+
+# ds_store
+.DS_Store
