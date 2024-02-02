@@ -1,15 +1,19 @@
-const express = require('express');
+const { createServer } = require('./server');
+const { dbConnect } = require('./db/connection');
 
-const app = express();
+require('dotenv').config();
 
-app.use(express.json({ limit: '50mb' }));
+const start = async () => {
+  const db = await dbConnect();
+  console.log('Connected to the database');
 
-app.get('/', (req, res) => {
-  res.send('Hello World!!');
-});
+  const app = await createServer();
 
-const port = process.env.PORT || 3000;
+  const port = process.env.PORT || 3000;
 
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
+  app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+  });
+};
+
+start();
