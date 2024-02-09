@@ -36,4 +36,4 @@ configSchema.statics.getLoLVersion = async function () {
 
 const Config = mongoose.model('Config', configSchema);
 
-module.exports = { Config };
+module.exports = Config;

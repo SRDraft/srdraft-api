@@ -1,5 +1,5 @@
 const { DataDragonService } = require('../services/dataDragon.service');
-const { Config } = require('../models/Config');
+const { Config } = require('../models');
 const cron = require('node-cron');
 
 const setConfigLatestLoLVersion = async () => {

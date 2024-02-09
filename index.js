@@ -1,8 +1,8 @@
 const { createServer } = require('./server');
 const { dbConnect } = require('./db/connection');
 const {
-  setConfigLatestLoLVersionJob,
-} = require('./jobs/setConfigLatestLoLVersion.job');
+  updateChampionsBasedOnVersionJob,
+} = require('./jobs/updateChampionsBasedOnVersion.job');
 
 require('dotenv').config();
 
@@ -19,7 +19,7 @@ const startServer = async () => {
   });
 
   // start jobs
-  setConfigLatestLoLVersionJob();
+  updateChampionsBasedOnVersionJob();
 };
 
 startServer();

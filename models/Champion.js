@@ -23,7 +23,11 @@ const championSchema = new mongoose.Schema({
     w: { type: Number, required: true },
     h: { type: Number, required: true },
   },
-  tags: [{ type: String, required: true }],
+  tags: {
+    type: [String],
+    default: [],
+    required: false,
+  },
   partype: { type: String, required: true },
   stats: {
     hp: { type: Number, required: true },
@@ -57,14 +61,21 @@ championSchema.pre(
     const currentVersion = await Config.getLoLVersion();
 
     // check if the update payload has the avatar in it
-    const avatarExistsInPayload = this._update && this._update.avatar;
+    const avatarExistsInPayload = this._update?.avatar;
 
-    if (avatarExistsInPayload) {
+    if (!!avatarExistsInPayload) {
       return next();
     }
 
-    this.avatar = `https://ddragon.leagueoflegends.com/cdn/${currentVersion}/img/champion/${this.id}.png?format=webp&quality=lossless`;
+    const id = this._update?.id || this.id;
+
+    this.avatar = `https://ddragon.leagueoflegends.com/cdn/${currentVersion}/img/champion/${id}.png?format=webp&quality=lossless`;
+    this._update.avatar = this.avatar;
 
     next();
   }
 );
+
+const Champion = mongoose.model('Champion', championSchema, 'champions');
+
+module.exports = Champion;

@@ -14,8 +14,9 @@ class DataDragonService {
     return versions[0];
   }
 
-  static async getChampions() {
-    const version = await this.getLatestVersion();
+  static async getChampions(ver) {
+    const version = ver || (await this.getLatestVersion());
+
     const champions = await axios.get(
       `http://ddragon.leagueoflegends.com/cdn/${version}/data/en_US/champion.json`
     );
