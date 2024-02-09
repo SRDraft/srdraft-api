@@ -24,6 +24,16 @@ configSchema.statics.setLoLVersion = async function (version) {
   return this.create({ key: 'LOL_VERSION', value: version });
 };
 
+configSchema.statics.getLoLVersion = async function () {
+  const config = await this.findOne({ key: 'LOL_VERSION' });
+
+  if (config) {
+    return config.value;
+  }
+
+  return null;
+};
+
 const Config = mongoose.model('Config', configSchema);
 
 module.exports = { Config };
