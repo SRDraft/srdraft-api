@@ -1,9 +1,12 @@
 const { createServer } = require('./server');
 const { dbConnect } = require('./db/connection');
+const {
+  updateChampionsBasedOnVersionJob,
+} = require('./jobs/updateChampionsBasedOnVersion.job');
 
 require('dotenv').config();
 
-const start = async () => {
+const startServer = async () => {
   const db = await dbConnect();
   console.log('Connected to the database');
 
@@ -14,6 +17,9 @@ const start = async () => {
   app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
   });
+
+  // start jobs
+  updateChampionsBasedOnVersionJob();
 };
 
-start();
+startServer();
