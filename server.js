@@ -15,6 +15,7 @@ const createServer = async () => {
   });
 
   // routes
+  app.use('/auth', require('./routes/auth.routes'));
 
   return app;
 };
